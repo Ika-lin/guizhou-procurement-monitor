@@ -1,0 +1,29 @@
+name: 贵州政府采购监控
+
+on:
+  schedule:
+    # 北京时间 9:07 = UTC 1:07
+    - cron: '7 1 * * *'
+  workflow_dispatch:  # 允许手动触发
+  push:
+    branches: [main]
+    paths:
+      - 'monitor.py'
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 运行监控
+        env:
+          WXPUSHER_APP_TOKEN: ${{ secrets.WXPUSHER_APP_TOKEN }}
+          WXPUSHER_UID: ${{ secrets.WXPUSHER_UID }}
+        run: python monitor.py
