@@ -5,10 +5,6 @@ on:
     # 北京时间 9:07 = UTC 1:07
     - cron: '7 1 * * *'
   workflow_dispatch:  # 允许手动触发
-  push:
-    branches: [main]
-    paths:
-      - 'monitor.py'
 
 jobs:
   monitor:
@@ -25,5 +21,5 @@ jobs:
       - name: 运行监控
         env:
           WXPUSHER_APP_TOKEN: ${{ secrets.WXPUSHER_APP_TOKEN }}
-          WXPUSHER_UID: ${{ secrets.WXPUSHER_UID }}
+          WXPUSHER_UIDS: ${{ secrets.WXPUSHER_UIDS }}
         run: python monitor.py
