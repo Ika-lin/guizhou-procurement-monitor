@@ -1,10 +1,7 @@
 name: 贵州政府采购监控
 
 on:
-  schedule:
-    # 北京时间 9:07 = UTC 1:07
-    - cron: '7 1 * * *'
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:  # 手动触发（备用）
 
 jobs:
   monitor:
